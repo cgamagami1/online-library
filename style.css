@@ -12,20 +12,67 @@ body {
 
 main {
     display: flex;
+}
+
+.right-col {
+    width: 100%;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.open-menu-icon {
+.open-menu-icon, .close-menu-icon {
     width: 3rem;
     margin: 2rem 1rem 1rem 1rem;
     cursor: pointer;
 }
 
-.logo {
+nav {
+    transform: translateX(-100%);
+    transition: transform ease 200ms;
+    position: fixed;
+    height: 100%;
+    width: 60%;
+    background-color: #00060a;
+    z-index: 1;
+}
+
+.nav-active {
+    transform: translateX(0);
+}
+
+.nav-heading {
+    color: white;
+    margin: 0 1rem;
+    padding: .25rem;
+    letter-spacing: .1rem;
+    border-bottom: 1px solid white;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-list li {
+    color: white;
+    background-color: #111111;
+    padding: .7rem;
+    margin: 1rem;
+    border-radius: .5rem;
+    font-size: 1.2rem;
+    transition: background-color ease 200ms;
+}
+
+.nav-list li:hover {
+    cursor: pointer;
+    background-color: #2c2c2c;
+}
+.page-title {
     color: white;
     font-size: 3rem;
-    margin: 0 1rem;
+    margin: 1rem;
     font-weight: 400;
 }
 
@@ -123,14 +170,41 @@ main {
     margin-left: .5rem;
 }
 
+.add-task-icon {
+    position: absolute;
+    width: 4rem;
+    background-color: #db19a1;
+    border-radius: 50%;
+    box-shadow: 4px 4px 4px;
+    margin: 2rem;
+    right: 0;
+    bottom: 0;
+    transition: transform ease 200ms;
+}
+
+.add-task-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: #bb1689;
+}
+
 @media only screen and (min-width: 550px) {
-    .logo {
+    .page-title {
         font-size: 4.5rem;
+        margin: 3rem;
+    }
+
+    .right-col {
+        width: 80%;
     }
 
     .check-box {
         width: 1.25rem;
         height: 1.25rem;
+    }
+
+    .nav-heading {
+        margin-top: 4rem;
     }
 
     .title {
@@ -139,5 +213,16 @@ main {
 
     .background-waves {
         transform: scale(1) translateX(0);
+    }
+
+    nav {
+        transform: translateX(0);
+        position: static;
+        width: 20%;
+        padding: 1rem;
+    }
+
+    .open-menu-icon, .close-menu-icon {
+        display: none;
     }
 }
