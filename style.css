@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&family=Oswald:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap');
 
 html, body, main {
     height: 100%;
@@ -59,11 +59,24 @@ nav {
 .nav-list li {
     color: white;
     background-color: #111111;
-    padding: .7rem;
+    padding: .7rem 1rem;
     margin: 1rem;
     border-radius: .5rem;
     font-size: 1.2rem;
     transition: background-color ease 200ms;
+    position: relative;
+}
+
+.selected-nav-item::before {
+    content: '';
+    width: 8px;
+    height: 100%;
+    background-color: #db19a1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
 }
 
 .nav-list li:hover {
@@ -112,9 +125,27 @@ nav {
     padding: 0.75rem;
     width: 80%;
     color: white;
+    transition: background-color ease 200ms, transform ease 200ms;
+    overflow: hidden;
+}
+
+.top {
     display: flex;
     justify-content: space-between;
-    transition: background-color ease 200ms, transform ease 200ms;
+}
+
+.description {
+    padding-right: 3rem;
+}
+
+.bottom {
+    display: flex;
+    justify-content: right;
+}
+
+.date, .project {
+    margin-top: 0;
+    margin-right: 1rem;
 }
 
 .task:hover {
