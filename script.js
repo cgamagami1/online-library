@@ -47,6 +47,10 @@ function taskCreator(title, description, date, project) {
     this.isCompleted = false;
 }
 
+function editTask(title, description, date, project) {
+
+}
+
 function addTask(title, description, date, project) {
     const task = new taskCreator(title, description, date, project);
     taskList.push(task);
@@ -62,6 +66,7 @@ function addTaskElement(task) {
     const taskCheckBox = taskElement.querySelector(".check-box");
     const taskDropDown = taskElement.querySelector(".drop-down");
     const taskRemoveTaskIcon = taskElement.querySelector(".remove-task-icon");
+    const taskEditIcon = taskElement.querySelector(".edit-icon");
 
     taskListElement.appendChild(taskElement);
     taskElement.addEventListener("click", () => taskDropDown.classList.toggle("hidden"));
@@ -74,6 +79,10 @@ function addTaskElement(task) {
         e.stopPropagation();
         taskList = taskList.filter((item) => item !== task);
         taskElement.remove();
+    });
+    taskEditIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
+        editTask();
     });
 
     taskTitle.textContent = task.title;
