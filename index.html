@@ -43,9 +43,9 @@
     </main>
 
     <div id="taskMenu" class="container hidden">
-        <div class="add-task-menu">
-            <h2 class="add-task-heading">Add Task</h2>
-            <img id="closeTaskMenu" class="close-add-task-menu-icon task-icon" src="images/round-close-black.svg" alt="close add task menu">
+        <div class="task-menu">
+            <h2 class="task-menu-heading">Add Task</h2>
+            <img id="closeTaskMenu" class="close-task-menu-icon task-icon" src="images/round-close-black.svg" alt="close add task menu">
             
             <div class="input-field">
                 <label for="title">Title:</label>
@@ -74,5 +74,35 @@
             <button id="addTask">Add Task</button>
         </div>
     </div>
+    <div id="editTaskMenu" class="container hidden">
+        <div class="task-menu">
+            <h2 class="task-menu-heading">Edit Task</h2>
+            
+            <div class="input-field">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="editTitle" maxlength="50">
+            </div>
+
+            <div class="input-field">
+                <label for="description">Description:</label>
+                <textarea name="description" style="resize: none;" id="editDescription" cols="30" rows="10"></textarea>
+            </div>
+
+            <div class="input-field">
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="editDate">
+            </div>
+
+            <div class="input-field">
+                <label for="project">Project:</label>
+                <select name="project" id="editProject">
+                    <option value="">None</option>
+                    <option value="Project 1">Project 1</option>
+                    <option value="Project 2">Project 2</option>
+                  </select>
+            </div>
+
+            <button id="editTask">Edit Task</button>
+        </div>
 </body>
 </html>

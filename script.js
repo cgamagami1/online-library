@@ -4,12 +4,18 @@ const closeMenuBtn = document.getElementById("closeMenu");
 const openTaskMenuBtn = document.getElementById("openTaskMenu");
 const closeTaskMenuBtn = document.getElementById("closeTaskMenu");
 const taskMenu = document.getElementById("taskMenu");
+const editTaskMenu = document.getElementById("editTaskMenu");
 const taskListElement = document.getElementById("taskList");
 const addTaskBtn = document.getElementById("addTask");
+const editTaskBtn = document.getElementById("editTask");
 const inputTitle = document.getElementById("inputTitle");
 const inputDescription = document.getElementById("inputDescription");
 const inputDate = document.getElementById("inputDate");
 const inputProject = document.getElementById("inputProject");
+const editTitle = document.getElementById("editTitle");
+const editDescription = document.getElementById("editDescription");
+const editDate = document.getElementById("editDate");
+const editProject = document.getElementById("editProject");
 let taskList = [];
 
 const taskHTML =
@@ -47,8 +53,14 @@ function taskCreator(title, description, date, project) {
     this.isCompleted = false;
 }
 
-function editTask(title, description, date, project) {
-
+function editTask(task, taskElement) {
+    editTaskMenu.classList.remove("hidden")
+    editTitle.value = task.title;
+    editDescription.value = task.description;
+    editDate.value = task.date;
+    editProject.value = task.project;
+    taskList = taskList.filter((item) => item !== task);
+    taskElement.remove();
 }
 
 function addTask(title, description, date, project) {
@@ -82,7 +94,7 @@ function addTaskElement(task) {
     });
     taskEditIcon.addEventListener("click", (e) => {
         e.stopPropagation();
-        editTask();
+        editTask(task, taskElement);
     });
 
     taskTitle.textContent = task.title;
@@ -101,19 +113,28 @@ function setCheckBoxElementCompleted(checkBox, isCompleted) {
     }
 }
 
-function resetAddTaskMenuElement() {
+function resetTaskMenuElements() {
     inputTitle.value = "";
     inputDescription.value = "";
     inputDate.value = "";
     inputProject.value = "";
     taskMenu.classList.add("hidden");
+    editTitle.value = "";
+    editDescription.value = "";
+    editDate.value = "";
+    editProject.value = "";
+    editTaskMenu.classList.add("hidden");
 }
 
 openMenuBtn.addEventListener("click", () => nav.classList.add("nav-active"));
 closeMenuBtn.addEventListener("click", () => nav.classList.remove("nav-active"));
 openTaskMenuBtn.addEventListener("click", () => taskMenu.classList.remove("hidden"));
-closeTaskMenuBtn.addEventListener("click", resetAddTaskMenuElement);
+closeTaskMenuBtn.addEventListener("click", resetTaskMenuElements);
 addTaskBtn.addEventListener("click", () => {
     addTask(inputTitle.value, inputDescription.value, inputDate.value, inputProject.value);
-    resetAddTaskMenuElement();
+    resetTaskMenuElements();
+});
+editTaskBtn.addEventListener("click", () => {
+    addTask(editTitle.value, editDescription.value, editDate.value, editProject.value);
+    resetTaskMenuElements();
 });

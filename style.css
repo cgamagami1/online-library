@@ -241,7 +241,7 @@ nav {
     display: none;
 }
 
-.add-task-menu {
+.task-menu {
     min-height: 50%;
     background-color: white;
     border-radius: 1rem;
@@ -253,16 +253,16 @@ nav {
     padding: 1rem;
 }
 
-.add-task-menu label {
+.task-menu label {
     display: block;
     margin-bottom: 0.5rem;
 }
 
-.add-task-menu input[name="title"] {
+.task-menu input[name="title"] {
     width: 100%;
 }
 
-.add-task-menu input, .add-task-menu textarea, .add-task-menu select {
+.task-menu input, .task-menu textarea, .task-menu select {
     border-radius: .25rem;
     padding: .5rem;
     border: 1px solid black;
@@ -272,11 +272,11 @@ nav {
     font-size: 1rem;
 }
 
-.add-task-menu textarea {
+.task-menu textarea {
     width: 100%;
 }
 
-.add-task-menu button {
+.task-menu button {
     background-color: #db19a1;
     color: white;
     font-family: 'Open Sans', sans-serif;
@@ -288,18 +288,18 @@ nav {
     margin-top: 2rem;
 }
 
-.add-task-menu button:hover {
+.task-menu button:hover {
     background-color: #bb1689;
     cursor: pointer;
 }
 
-.add-task-heading {
+.task-menu-heading {
     text-align: center;
     font-weight: 400;
     margin: 0;
 }
 
-.close-add-task-menu-icon {
+.close-task-menu-icon {
     width: 2rem;
     position: absolute;
     right: 0;
