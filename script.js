@@ -18,6 +18,7 @@ const editDate = document.getElementById("editDate");
 const editProject = document.getElementById("editProject");
 const taskFilterList = document.getElementById("taskFilterList");
 let taskList = [];
+let filter = "All Tasks";
 
 const taskHTML =
 `<li class="task">
@@ -137,8 +138,32 @@ function regenerateTaskElements() {
     }
 
     for (const task of taskList) {
-        addTaskElement(task);
+        switch (filter) {
+            case "All Tasks":
+                addTaskElement(task);
+                break;
+            case "Today's Tasks":
+
+                break;
+            case "This Week's Tasks":
+
+                break;
+            case "Completed Tasks":
+                if (task.isCompleted) {
+                    addTaskElement(task);
+                }
+                break;
+        }
     }
+}
+
+function selectFilterElement(target) {
+    for (const taskFilter of taskFilterList.children) {
+        taskFilter.classList.remove("selected-nav-item");
+    }
+    target.classList.add("selected-nav-item");
+
+    regenerateTaskElements();
 }
 
 openMenuBtn.addEventListener("click", () => nav.classList.add("nav-active"));
@@ -154,5 +179,10 @@ editTaskBtn.addEventListener("click", () => {
     resetTaskMenuElements();
 });
 taskFilterList.addEventListener("click", (e) => {
-    
+    if (e.target == taskFilterList) {
+        return;
+    }
+
+    filter = e.target.textContent;
+    selectFilterElement(e.target);
 });
