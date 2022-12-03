@@ -16,6 +16,7 @@ const editTitle = document.getElementById("editTitle");
 const editDescription = document.getElementById("editDescription");
 const editDate = document.getElementById("editDate");
 const editProject = document.getElementById("editProject");
+const taskFilterList = document.getElementById("taskFilterList");
 let taskList = [];
 
 const taskHTML =
@@ -53,20 +54,25 @@ function taskCreator(title, description, date, project) {
     this.isCompleted = false;
 }
 
-function editTask(task, taskElement) {
+function openEditTaskMenu(task) {
     editTaskMenu.classList.remove("hidden")
     editTitle.value = task.title;
     editDescription.value = task.description;
     editDate.value = task.date;
     editProject.value = task.project;
     taskList = taskList.filter((item) => item !== task);
-    taskElement.remove();
 }
 
 function addTask(title, description, date, project) {
     const task = new taskCreator(title, description, date, project);
     taskList.push(task);
-    addTaskElement(task);
+    taskList = taskList.sort((a, b) => new Date(a.date) - new Date(b.date));
+    regenerateTaskElements();
+}
+
+function removeTask(task) {
+    taskList = taskList.filter((item) => item !== task);
+    regenerateTaskElements();
 }
 
 function addTaskElement(task) {
@@ -89,12 +95,11 @@ function addTaskElement(task) {
     });
     taskRemoveTaskIcon.addEventListener("click", (e) => {
         e.stopPropagation();
-        taskList = taskList.filter((item) => item !== task);
-        taskElement.remove();
+        removeTask(task);
     });
     taskEditIcon.addEventListener("click", (e) => {
         e.stopPropagation();
-        editTask(task, taskElement);
+        openEditTaskMenu(task);
     });
 
     taskTitle.textContent = task.title;
@@ -126,6 +131,16 @@ function resetTaskMenuElements() {
     editTaskMenu.classList.add("hidden");
 }
 
+function regenerateTaskElements() {
+    for (let i = taskListElement.children.length - 1; i >= 0; i--) {
+        taskListElement.children[i].remove();
+    }
+
+    for (const task of taskList) {
+        addTaskElement(task);
+    }
+}
+
 openMenuBtn.addEventListener("click", () => nav.classList.add("nav-active"));
 closeMenuBtn.addEventListener("click", () => nav.classList.remove("nav-active"));
 openTaskMenuBtn.addEventListener("click", () => taskMenu.classList.remove("hidden"));
@@ -137,4 +152,7 @@ addTaskBtn.addEventListener("click", () => {
 editTaskBtn.addEventListener("click", () => {
     addTask(editTitle.value, editDescription.value, editDate.value, editProject.value);
     resetTaskMenuElements();
+});
+taskFilterList.addEventListener("click", (e) => {
+    
 });
