@@ -1,13 +1,7 @@
 const nav = document.getElementById("nav");
-const openMenuBtn = document.getElementById("openMenu");
-const closeMenuBtn = document.getElementById("closeMenu");
-const openTaskMenuBtn = document.getElementById("openTaskMenu");
-const closeTaskMenuBtn = document.getElementById("closeTaskMenu");
 const taskMenu = document.getElementById("taskMenu");
 const editTaskMenu = document.getElementById("editTaskMenu");
 const taskListElement = document.getElementById("taskList");
-const addTaskBtn = document.getElementById("addTask");
-const editTaskBtn = document.getElementById("editTask");
 const inputTitle = document.getElementById("inputTitle");
 const inputDescription = document.getElementById("inputDescription");
 const inputDate = document.getElementById("inputDate");
@@ -78,14 +72,8 @@ function removeTask(task) {
 
 function addTaskElement(task) {
     const taskElement = elementFromHTML(taskHTML);
-    const taskTitle = taskElement.querySelector(".title");
-    const taskDescription = taskElement.querySelector(".description");
-    const taskDate = taskElement.querySelector(".date");
-    const taskProject = taskElement.querySelector(".project");
     const taskCheckBox = taskElement.querySelector(".check-box");
     const taskDropDown = taskElement.querySelector(".drop-down");
-    const taskRemoveTaskIcon = taskElement.querySelector(".remove-task-icon");
-    const taskEditIcon = taskElement.querySelector(".edit-icon");
 
     taskListElement.appendChild(taskElement);
     taskElement.addEventListener("click", () => taskDropDown.classList.toggle("hidden"));
@@ -94,19 +82,19 @@ function addTaskElement(task) {
         taskCheckBox.classList.toggle("checked");
         task.isCompleted = !task.isCompleted;
     });
-    taskRemoveTaskIcon.addEventListener("click", (e) => {
+    taskElement.querySelector(".remove-task-icon").addEventListener("click", (e) => {
         e.stopPropagation();
         removeTask(task);
     });
-    taskEditIcon.addEventListener("click", (e) => {
+    taskElement.querySelector(".edit-icon").addEventListener("click", (e) => {
         e.stopPropagation();
         openEditTaskMenu(task);
     });
 
-    taskTitle.textContent = task.title;
-    taskDescription.textContent = task.description;
-    taskDate.textContent = task.date;
-    taskProject.textContent = task.project;
+    taskElement.querySelector(".title").textContent = task.title;
+    taskElement.querySelector(".description").textContent = task.description;
+    taskElement.querySelector(".date").textContent = task.date;
+    taskElement.querySelector(".project").textContent = task.project;
     setCheckBoxElementCompleted(taskCheckBox, task.isCompleted);
 }
 
@@ -166,18 +154,21 @@ function selectFilterElement(target) {
     regenerateTaskElements();
 }
 
-openMenuBtn.addEventListener("click", () => nav.classList.add("nav-active"));
-closeMenuBtn.addEventListener("click", () => nav.classList.remove("nav-active"));
-openTaskMenuBtn.addEventListener("click", () => taskMenu.classList.remove("hidden"));
-closeTaskMenuBtn.addEventListener("click", resetTaskMenuElements);
-addTaskBtn.addEventListener("click", () => {
+document.getElementById("openMenu").addEventListener("click", () => nav.classList.add("nav-active"));
+document.getElementById("closeMenu").addEventListener("click", () => nav.classList.remove("nav-active"));
+document.getElementById("openTaskMenu").addEventListener("click", () => taskMenu.classList.remove("hidden"));
+document.getElementById("closeTaskMenu").addEventListener("click", resetTaskMenuElements);
+
+document.getElementById("addTask").addEventListener("click", () => {
     addTask(inputTitle.value, inputDescription.value, inputDate.value, inputProject.value);
     resetTaskMenuElements();
 });
-editTaskBtn.addEventListener("click", () => {
+
+document.getElementById("editTask").addEventListener("click", () => {
     addTask(editTitle.value, editDescription.value, editDate.value, editProject.value);
     resetTaskMenuElements();
 });
+
 taskFilterList.addEventListener("click", (e) => {
     if (e.target == taskFilterList) {
         return;
